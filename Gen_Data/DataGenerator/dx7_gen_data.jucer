@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<JUCERPROJECT id="XytnYv" name="dx7_gen_data" projectType="consoleapp" jucerVersion="5.4.4">
+  <MAINGROUP id="IOSMEi" name="dx7_gen_data">
+    <GROUP id="{4C268CAF-7C48-58EC-8D52-D262F53D99C3}" name="dexed">
+      <GROUP id="{E595CDF9-F33D-6067-3949-AD25AC2BE89B}" name="Source">
+        <GROUP id="{06466279-F96C-07FD-CD3E-04239CB2D3FA}" name="dsp">
+          <FILE id="ppcLQb" name="EngineMkI.cpp" compile="1" resource="0" file="../dexed/Source/EngineMkI.cpp"/>
+          <FILE id="NvmNru" name="EngineMkI.h" compile="0" resource="0" file="../dexed/Source/EngineMkI.h"/>
+          <FILE id="xcNu8V" name="EngineOpl.cpp" compile="1" resource="0" file="../dexed/Source/EngineOpl.cpp"/>
+          <FILE id="RsEsZf" name="EngineOpl.h" compile="0" resource="0" file="../dexed/Source/EngineOpl.h"/>
+          <FILE id="atJaFc" name="PluginFx.cpp" compile="1" resource="0" file="../dexed/Source/PluginFx.cpp"/>
+          <FILE id="O1WaEP" name="PluginFx.h" compile="0" resource="0" file="../dexed/Source/PluginFx.h"/>
+        </GROUP>
+        <GROUP id="{E51FA5F7-64B3-4473-1214-3A5430D883D0}" name="msfa">
+          <FILE id="gmh1SH" name="aligned_buf.h" compile="0" resource="0" file="../dexed/Source/msfa/aligned_buf.h"/>
+          <FILE id="mq7aK4" name="controllers.h" compile="0" resource="0" file="../dexed/Source/msfa/controllers.h"/>
+          <FILE id="qz3Bsp" name="dx7note.cc" compile="1" resource="0" file="../dexed/Source/msfa/dx7note.cc"/>
+          <FILE id="ldg2w1" name="dx7note.h" compile="0" resource="0" file="../dexed/Source/msfa/dx7note.h"/>
+          <FILE id="RL9HC1" name="env.cc" compile="1" resource="0" file="../dexed/Source/msfa/env.cc"/>
+          <FILE id="jy5p3e" name="env.h" compile="0" resource="0" file="../dexed/Source/msfa/env.h"/>
+          <FILE id="Gjx5hI" name="exp2.cc" compile="1" resource="0" file="../dexed/Source/msfa/exp2.cc"/>
+          <FILE id="rRLnkj" name="exp2.h" compile="0" resource="0" file="../dexed/Source/msfa/exp2.h"/>
+          <FILE id="aRGuA2" name="fm_core.cc" compile="1" resource="0" file="../dexed/Source/msfa/fm_core.cc"/>
+          <FILE id="ojGFnn" name="fm_core.h" compile="0" resource="0" file="../dexed/Source/msfa/fm_core.h"/>
+          <FILE id="iRqSSn" name="fm_op_kernel.cc" compile="1" resource="0" file="../dexed/Source/msfa/fm_op_kernel.cc"/>
+          <FILE id="kT8KDc" name="fm_op_kernel.h" compile="0" resource="0" file="../dexed/Source/msfa/fm_op_kernel.h"/>
+          <FILE id="w8vqMo" name="freqlut.cc" compile="1" resource="0" file="../dexed/Source/msfa/freqlut.cc"/>
+          <FILE id="RFChbB" name="freqlut.h" compile="0" resource="0" file="../dexed/Source/msfa/freqlut.h"/>
+          <FILE id="ueWH12" name="lfo.cc" compile="1" resource="0" file="../dexed/Source/msfa/lfo.cc"/>
+          <FILE id="KxGNQZ" name="lfo.h" compile="0" resource="0" file="../dexed/Source/msfa/lfo.h"/>
+          <FILE id="qpLCba" name="module.h" compile="0" resource="0" file="../dexed/Source/msfa/module.h"/>
+          <FILE id="WS5JMO" name="pitchenv.cc" compile="1" resource="0" file="../dexed/Source/msfa/pitchenv.cc"/>
+          <FILE id="XOhJqO" name="pitchenv.h" compile="0" resource="0" file="../dexed/Source/msfa/pitchenv.h"/>
+          <FILE id="GyDCKg" name="sin.cc" compile="1" resource="0" file="../dexed/Source/msfa/sin.cc"/>
+          <FILE id="KYjwxT" name="sin.h" compile="0" resource="0" file="../dexed/Source/msfa/sin.h"/>
+          <FILE id="bekk1j" name="synth.h" compile="0" resource="0" file="../dexed/Source/msfa/synth.h"/>
+        </GROUP>
+        <GROUP id="{5ABFDB13-C6FB-2F38-AEDB-336F7D7DD981}" name="ui">
+          <FILE id="BRA318" name="AlgoDisplay.cpp" compile="1" resource="0" file="../dexed/Source/AlgoDisplay.cpp"/>
+          <FILE id="a9nOZG" name="AlgoDisplay.h" compile="0" resource="0" file="../dexed/Source/AlgoDisplay.h"/>
+          <FILE id="c0tihG" name="CartManager.cpp" compile="1" resource="0" file="../dexed/Source/CartManager.cpp"/>
+          <FILE id="e828g3" name="CartManager.h" compile="0" resource="0" file="../dexed/Source/CartManager.h"/>
+          <FILE id="gjxDk9" name="DXComponents.cpp" compile="1" resource="0"
+                file="../dexed/Source/DXComponents.cpp"/>
+          <FILE id="eJLOFE" name="DXComponents.h" compile="0" resource="0" file="../dexed/Source/DXComponents.h"/>
+          <FILE id="TQvNEN" name="DXLookNFeel.cpp" compile="1" resource="0" file="../dexed/Source/DXLookNFeel.cpp"/>
+          <FILE id="ltQdU5" name="DXLookNFeel.h" compile="0" resource="0" file="../dexed/Source/DXLookNFeel.h"/>
+          <FILE id="PdVhRJ" name="GlobalEditor.cpp" compile="1" resource="0"
+                file="../dexed/Source/GlobalEditor.cpp"/>
+          <FILE id="yDTte5" name="GlobalEditor.h" compile="0" resource="0" file="../dexed/Source/GlobalEditor.h"/>
+          <FILE id="cLFxl3" name="OperatorEditor.cpp" compile="1" resource="0"
+                file="../dexed/Source/OperatorEditor.cpp"/>
+          <FILE id="o6rG4C" name="OperatorEditor.h" compile="0" resource="0"
+                file="../dexed/Source/OperatorEditor.h"/>
+          <FILE id="lb5CCu" name="ParamDialog.cpp" compile="1" resource="0" file="../dexed/Source/ParamDialog.cpp"/>
+          <FILE id="sEaybR" name="ParamDialog.h" compile="0" resource="0" file="../dexed/Source/ParamDialog.h"/>
+          <FILE id="tMjvIx" name="PluginEditor.cpp" compile="1" resource="0"
+                file="../dexed/Source/PluginEditor.cpp"/>
+          <FILE id="psCNU4" name="PluginEditor.h" compile="0" resource="0" file="../dexed/Source/PluginEditor.h"/>
+          <FILE id="NyNdZZ" name="ProgramListBox.cpp" compile="1" resource="0"
+                file="../dexed/Source/ProgramListBox.cpp"/>
+          <FILE id="iU8Lig" name="ProgramListBox.h" compile="0" resource="0"
+                file="../dexed/Source/ProgramListBox.h"/>
+        </GROUP>
+        <FILE id="n1spyb" name="Dexed.h" compile="0" resource="0" file="../dexed/Source/Dexed.h"/>
+        <FILE id="We5lct" name="PluginData.cpp" compile="1" resource="0" file="../dexed/Source/PluginData.cpp"/>
+        <FILE id="Pxrzct" name="PluginData.h" compile="0" resource="0" file="../dexed/Source/PluginData.h"/>
+        <FILE id="P6kezy" name="PluginParam.cpp" compile="1" resource="0" file="../dexed/Source/PluginParam.cpp"/>
+        <FILE id="YOTptn" name="PluginParam.h" compile="0" resource="0" file="../dexed/Source/PluginParam.h"/>
+        <FILE id="X4CHLY" name="PluginProcessor.cpp" compile="1" resource="0"
+              file="../dexed/Source/PluginProcessor.cpp"/>
+        <FILE id="eKQ9Cc" name="PluginProcessor.h" compile="0" resource="0"
+              file="../dexed/Source/PluginProcessor.h"/>
+        <FILE id="SWOimI" name="SysexComm.cpp" compile="1" resource="0" file="../dexed/Source/SysexComm.cpp"/>
+        <FILE id="hhGkf2" name="SysexComm.h" compile="0" resource="0" file="../dexed/Source/SysexComm.h"/>
+      </GROUP>
+      <GROUP id="{19B138BB-A69F-C66E-3338-6BB8412DC83D}" name="Resources">
+        <GROUP id="{DD14B2AB-5318-F877-FA71-4639BB6D2DA4}" name="Source"/>
+        <FILE id="mNk73d" name="about.png" compile="0" resource="1" file="../dexed/Resources/about.png"/>
+        <FILE id="gvWBKY" name="builtin_pgm.zip" compile="0" resource="1" file="../dexed/Resources/builtin_pgm.zip"/>
+        <FILE id="oI453W" name="ButtonUnlabeled_50x30.png" compile="0" resource="1"
+              file="../dexed/Resources/ui/ButtonUnlabeled_50x30.png"/>
+        <FILE id="esybHf" name="dexedIcon.png" compile="0" resource="1" file="../dexed/Resources/ui/dexedIcon.png"/>
+        <FILE id="KwqGeI" name="GlobalEditor_864x144.png" compile="0" resource="1"
+              file="../dexed/Resources/ui/GlobalEditor_864x144.png"/>
+        <FILE id="EKRDWz" name="Knob_34x34.png" compile="0" resource="1" file="../dexed/Resources/ui/Knob_34x34.png"/>
+        <FILE id="YhxtDD" name="LFO_36_26.png" compile="0" resource="1" file="../dexed/Resources/ui/LFO_36_26.png"/>
+        <FILE id="Lw3EOK" name="Light_14x14.png" compile="0" resource="1" file="../dexed/Resources/ui/Light_14x14.png"/>
+        <FILE id="D6RKC2" name="Meter_140x8.png" compile="0" resource="1" file="../dexed/Resources/ui/Meter_140x8.png"/>
+        <FILE id="FIAqjS" name="NotoSans-Bold.ttf" compile="0" resource="1"
+              file="../dexed/Resources/ui/NotoSans-Bold.ttf"/>
+        <FILE id="lXCGqw" name="NotoSans-Regular.ttf" compile="0" resource="1"
+              file="../dexed/Resources/ui/NotoSans-Regular.ttf"/>
+        <FILE id="dUwBTz" name="OperatorEditor_287x218.png" compile="0" resource="1"
+              file="../dexed/Resources/ui/OperatorEditor_287x218.png"/>
+        <FILE id="evsr1P" name="Scaling_36_26.png" compile="0" resource="1"
+              file="../dexed/Resources/ui/Scaling_36_26.png"/>
+        <FILE id="ctZ1cP" name="Slider_26x26.png" compile="0" resource="1"
+              file="../dexed/Resources/ui/Slider_26x26.png"/>
+        <FILE id="lKR5qL" name="Switch_32x32.png" compile="0" resource="1"
+              file="../dexed/Resources/ui/Switch_32x32.png"/>
+        <FILE id="y2Y6Ab" name="Switch_48x26.png" compile="0" resource="1"
+              file="../dexed/Resources/ui/Switch_48x26.png"/>
+      </GROUP>
+    </GROUP>
+    <GROUP id="{EC944704-8C08-3F20-0560-6054C9218E8B}" name="Source">
+      <FILE id="sBBKRU" name="Main.cpp" compile="1" resource="0" file="Source/Main.cpp"/>
+    </GROUP>
+  </MAINGROUP>
+  <EXPORTFORMATS>
+    <XCODE_MAC targetFolder="Builds/MacOSX">
+      <CONFIGURATIONS>
+        <CONFIGURATION isDebug="1" name="Debug"/>
+        <CONFIGURATION isDebug="0" name="Release"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_audio_basics" path="../../../../../../Persp3ctive/StudioXDAWplugin/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="../../../../../../Persp3ctive/StudioXDAWplugin/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="../../../../../../Persp3ctive/StudioXDAWplugin/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="../../../../../../Persp3ctive/StudioXDAWplugin/JUCE/modules"/>
+        <MODULEPATH id="juce_core" path="../../../../../../Persp3ctive/StudioXDAWplugin/JUCE/modules"/>
+        <MODULEPATH id="juce_data_structures" path="../../../../../../Persp3ctive/StudioXDAWplugin/JUCE/modules"/>
+        <MODULEPATH id="juce_events" path="../../../../../../Persp3ctive/StudioXDAWplugin/JUCE/modules"/>
+        <MODULEPATH id="juce_graphics" path="../../../../../../Persp3ctive/StudioXDAWplugin/JUCE/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="../../../../../../Persp3ctive/StudioXDAWplugin/JUCE/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="../../../../../../Persp3ctive/StudioXDAWplugin/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_utils" path="../../../../../../Persp3ctive/StudioXDAWplugin/JUCE/modules"/>
+      </MODULEPATHS>
+    </XCODE_MAC>
+    <VS2017 targetFolder="Builds/VisualStudio2017">
+      <CONFIGURATIONS>
+        <CONFIGURATION isDebug="1" name="Debug"/>
+        <CONFIGURATION isDebug="0" name="Release"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_audio_basics" path="../../../../../../Persp3ctive/StudioXDAWplugin/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="../../../../../../Persp3ctive/StudioXDAWplugin/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="../../../../../../Persp3ctive/StudioXDAWplugin/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="../../../../../../Persp3ctive/StudioXDAWplugin/JUCE/modules"/>
+        <MODULEPATH id="juce_core" path="../../../../../../Persp3ctive/StudioXDAWplugin/JUCE/modules"/>
+        <MODULEPATH id="juce_data_structures" path="../../../../../../Persp3ctive/StudioXDAWplugin/JUCE/modules"/>
+        <MODULEPATH id="juce_events" path="../../../../../../Persp3ctive/StudioXDAWplugin/JUCE/modules"/>
+        <MODULEPATH id="juce_graphics" path="../../../../../../Persp3ctive/StudioXDAWplugin/JUCE/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="../../../../../../Persp3ctive/StudioXDAWplugin/JUCE/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="../../../../../../Persp3ctive/StudioXDAWplugin/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_utils" path="../../../../../../Persp3ctive/StudioXDAWplugin/JUCE/modules"/>
+      </MODULEPATHS>
+    </VS2017>
+    <LINUX_MAKE targetFolder="Builds/LinuxMakefile">
+      <CONFIGURATIONS>
+        <CONFIGURATION isDebug="1" name="Debug"/>
+        <CONFIGURATION isDebug="0" name="Release"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_audio_basics" path="../../../../../../Persp3ctive/StudioXDAWplugin/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="../../../../../../Persp3ctive/StudioXDAWplugin/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="../../../../../../Persp3ctive/StudioXDAWplugin/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="../../../../../../Persp3ctive/StudioXDAWplugin/JUCE/modules"/>
+        <MODULEPATH id="juce_core" path="../../../../../../Persp3ctive/StudioXDAWplugin/JUCE/modules"/>
+        <MODULEPATH id="juce_data_structures" path="../../../../../../Persp3ctive/StudioXDAWplugin/JUCE/modules"/>
+        <MODULEPATH id="juce_events" path="../../../../../../Persp3ctive/StudioXDAWplugin/JUCE/modules"/>
+        <MODULEPATH id="juce_graphics" path="../../../../../../Persp3ctive/StudioXDAWplugin/JUCE/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="../../../../../../Persp3ctive/StudioXDAWplugin/JUCE/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="../../../../../../Persp3ctive/StudioXDAWplugin/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_utils" path="../../../../../../Persp3ctive/StudioXDAWplugin/JUCE/modules"/>
+      </MODULEPATHS>
+    </LINUX_MAKE>
+  </EXPORTFORMATS>
+  <MODULES>
+    <MODULE id="juce_audio_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_devices" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_formats" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_processors" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_utils" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_core" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_events" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_graphics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_gui_extra" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+  </MODULES>
+  <LIVE_SETTINGS>
+    <WINDOWS/>
+  </LIVE_SETTINGS>
+  <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1"/>
+</JUCERPROJECT>

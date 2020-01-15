@@ -1,0 +1,27 @@
+#JUCE generated content
+Builds
+BinaryData.h
+BinaryData*.cpp
+JuceLibraryCode
+
+#Windows Temp Cache Files
+[Tt]humbs.db
+
+#macOS Finder and whatnot
+.DS_Store
+*.DS_Store
+*.swp
+*~
+
+# Python artifacts
+.ipynb_checkpoints
+__pycache__
+
+# Tex artifacts
+*.synctex.gz
+*.synctex(busy)
+*.aux
+*.bbl
+*.blg
+*.out
+*.log

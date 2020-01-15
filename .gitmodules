@@ -1,0 +1,3 @@
+[submodule "Gen_Data/dexed"]
+	path = Gen_Data/dexed
+	url = https://github.com/asb2m10/dexed.git
