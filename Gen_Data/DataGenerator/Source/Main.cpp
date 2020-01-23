@@ -23,8 +23,8 @@ private:
 
 int writeBufferToFile (ScopedFormatManager& formatManager, File& outFile,
                        const AudioBuffer<float>& buffer, double sampleRate, int lengthSamples);
-void setRandomDexedParameters (DexedAudioProcessor& dexed);
-void randomMidiBuffer (MidiBuffer& midi, int lengthSamples);
+void setRandomDexedParameters (DexedAudioProcessor& dexed, Array<File>& carts, Random& rand);
+void randomMidiBuffer (MidiBuffer& midi, int lengthSamples, Random& rand);
 
 int main (int argc, char* argv[])
 {
@@ -33,6 +33,7 @@ int main (int argc, char* argv[])
 
     DexedAudioProcessor dexed; // create instance of dexed
     ArgumentList args (argc, argv); // Argument list
+    Random rand; // random number generator
     int result = 0; // executable result
 
     // Create output directory
@@ -54,11 +55,15 @@ int main (int argc, char* argv[])
     
     // MIDI buffer
     MidiBuffer midi;
-    randomMidiBuffer (midi, lengthSamples);
+    randomMidiBuffer (midi, lengthSamples, rand);
 
     // How many files to create
     int num = args.containsOption ("--num") ?
         jmax (0, args.getValueForOption ("--num").getIntValue()) : 1;
+
+    // Set up cartridges
+    auto carts = dexed.dexedCartDir.findChildFiles (File::TypesOfFileToFind::findFiles, true, "*.syx");
+    std::cout << "Num available programs: " << carts.size()*32 << std::endl;
 
     for (int i = 0; i < num; ++i)
     {
@@ -68,13 +73,21 @@ int main (int argc, char* argv[])
         outFile.create();
         
         // Set parameters
-        setRandomDexedParameters (dexed);    
+        setRandomDexedParameters (dexed, carts, rand);
         
         // synthesize buffer
         buffer.clear();
         dexed.prepareToPlay ((double) sampleRate, lengthSamples);
         dexed.processBlock (buffer, midi);
         dexed.releaseResources();
+
+        // check for empty buffer
+        auto magDB = Decibels::gainToDecibels (buffer.getMagnitude (0, lengthSamples));
+        if (magDB < -60.0f)
+        {
+            std::cout << "Silent buffer, running again..." << std::endl;
+            --i;
+        }
         
         // write to file
         result = writeBufferToFile (formatManager, outFile, buffer, (double) sampleRate, lengthSamples);
@@ -86,9 +99,8 @@ int main (int argc, char* argv[])
     return result;
 }
 
-void randomMidiBuffer (MidiBuffer& midi, int lengthSamples)
+void randomMidiBuffer (MidiBuffer& midi, int lengthSamples, Random& rand)
 {
-    Random rand; // random number generator
     const int midiChannel = 1;
 
     int curSample = 0;
@@ -117,11 +129,8 @@ void getParams (DexedAudioProcessor& dexed)
         std::cout << ctrl->label << ": " << ctrl->getValueHost() << std::endl;
 }
 
-void setRandomDexedParameters (DexedAudioProcessor& dexed)
+void setRandomDexedParameters (DexedAudioProcessor& dexed, Array<File>& carts, Random& rand)
 {
-    Random rand; // random number generator
-    auto carts = dexed.dexedCartDir.findChildFiles (File::TypesOfFileToFind::findFiles, true, "*.syx");
-
     // load random cartridge
     Cartridge thisCart;
     thisCart.load (carts[rand.nextInt (carts.size())]);
@@ -130,7 +139,7 @@ void setRandomDexedParameters (DexedAudioProcessor& dexed)
     // load random program
     int prog = rand.nextInt (32);
     dexed.setCurrentProgram (prog);
-    std::cout << "Program: " << dexed.getProgramName (prog) << "\n\n";
+    std::cout << "Program: " << dexed.getProgramName (prog) << std::endl;
 
     // getParams (dexed);
 }
