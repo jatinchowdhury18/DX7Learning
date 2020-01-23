@@ -25,6 +25,7 @@ int writeBufferToFile (ScopedFormatManager& formatManager, File& outFile,
                        const AudioBuffer<float>& buffer, double sampleRate, int lengthSamples);
 void setRandomDexedParameters (DexedAudioProcessor& dexed, Array<File>& carts, Random& rand);
 void randomMidiBuffer (MidiBuffer& midi, int lengthSamples, Random& rand);
+void getParams (DexedAudioProcessor& dexed);
 
 int main (int argc, char* argv[])
 {
@@ -46,7 +47,7 @@ int main (int argc, char* argv[])
     // Set up buffer  
     const float sampleRate = 48000.0f;
     const float lengthSeconds = args.containsOption ("--length") ?
-        args.getValueForOption ("--length").getFloatValue() : 2.0f;
+        args.getValueForOption ("--length").getFloatValue() : 10.0f;
     std::cout << lengthSeconds << std::endl;
     const int numChannels = 2;
     const int lengthSamples = int (sampleRate * lengthSeconds);
@@ -96,30 +97,41 @@ int main (int argc, char* argv[])
             break;
     }
 
+    getParams (dexed);
+
     return result;
 }
 
 void randomMidiBuffer (MidiBuffer& midi, int lengthSamples, Random& rand)
 {
+    midi.clear();
+
     const int midiChannel = 1;
+    const int noteNums[7] = {36, 42, 48, 54, 60, 66, 72};
+    const int lengths[7] = {10000, 3000, 50000, 5000, 8000, 70000, 6000};
+    const int offLength = 30000;
 
     int curSample = 0;
+    int noteIdx = 0;
     bool turnOn = true;
-    int noteNum = 0;
     while (curSample < lengthSamples)
     {
         if (turnOn)
         {
-            noteNum = rand.nextInt (Range<int> (24, 96)); // choose note between C2 and C7
-            midi.addEvent (MidiMessage::noteOn  (midiChannel, noteNum, 1.0f), curSample);
+            midi.addEvent (MidiMessage::noteOn (midiChannel, noteNums[noteIdx], 1.0f), curSample);
+            curSample += lengths[noteIdx];
         }
         else
         {
-            midi.addEvent (MidiMessage::noteOff (midiChannel, noteNum), curSample);
+            midi.addEvent (MidiMessage::noteOff (midiChannel, noteNums[noteIdx]), curSample);
+            curSample += offLength;
+            noteIdx++;
         }
 
+        if (noteIdx >= 7)
+            break;
+
         turnOn = ! turnOn;
-        curSample += rand.nextInt (Range<int> (1000, 40000));
     }
 }
 
@@ -148,7 +160,7 @@ int writeBufferToFile (ScopedFormatManager& formatManager, File& outFile,
                        const AudioBuffer<float>& buffer, double sampleRate, int lengthSamples)
 {
     std::unique_ptr<AudioFormatWriter> writer (formatManager.findFormatForFileExtension ("wav")->createWriterFor 
-    (outFile.createOutputStream(), (double) sampleRate, AudioChannelSet::stereo(), 16, StringPairArray(), 0));
+        (outFile.createOutputStream(), (double) sampleRate, AudioChannelSet::stereo(), 16, StringPairArray(), 0));
 
     if (writer.get() == nullptr)
     {
