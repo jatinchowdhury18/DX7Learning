@@ -32,35 +32,56 @@ int main (int argc, char* argv[])
     ScopedFormatManager formatManager; // audio format manager
 
     DexedAudioProcessor dexed; // create instance of dexed
+    ArgumentList args (argc, argv); // Argument list
     int result = 0; // executable result
 
-    // create output file
-    File outFile (File::getCurrentWorkingDirectory().getChildFile ("test.wav"));
-    outFile.deleteFile();
-    outFile.create();
+    // Create output directory
+    File outDir (File::getCurrentWorkingDirectory().getChildFile ("testDir"));
+    if (args.containsOption ("--outdir"))
+        outDir = args.getFileForOption ("--outdir");
+    outDir.deleteRecursively();
+    outDir.createDirectory();
 
-    // Set up buffer
+    // Set up buffer  
     const float sampleRate = 48000.0f;
-    const float lengthSeconds = 2.0f;
+    const float lengthSeconds = args.containsOption ("--length") ?
+        args.getValueForOption ("--length").getFloatValue() : 2.0f;
+    std::cout << lengthSeconds << std::endl;
     const int numChannels = 2;
     const int lengthSamples = int (sampleRate * lengthSeconds);
-
+    
     AudioBuffer<float> buffer (numChannels, lengthSamples);
-
+    
     // MIDI buffer
     MidiBuffer midi;
     randomMidiBuffer (midi, lengthSamples);
 
-    // Set parameters
-    setRandomDexedParameters (dexed);    
+    // How many files to create
+    int num = args.containsOption ("--num") ?
+        jmax (0, args.getValueForOption ("--num").getIntValue()) : 1;
 
-    // synthesize buffer
-    dexed.prepareToPlay ((double) sampleRate, lengthSamples);
-    dexed.processBlock (buffer, midi);
-    dexed.releaseResources();
+    for (int i = 0; i < num; ++i)
+    {
+        // create output file
+        File outFile (outDir.getChildFile ("sample_" + String (i) + ".wav"));
+        outFile.deleteFile();
+        outFile.create();
+        
+        // Set parameters
+        setRandomDexedParameters (dexed);    
+        
+        // synthesize buffer
+        buffer.clear();
+        dexed.prepareToPlay ((double) sampleRate, lengthSamples);
+        dexed.processBlock (buffer, midi);
+        dexed.releaseResources();
+        
+        // write to file
+        result = writeBufferToFile (formatManager, outFile, buffer, (double) sampleRate, lengthSamples);
 
-    // write to file
-    result = writeBufferToFile (formatManager, outFile, buffer, (double) sampleRate, lengthSamples);
+        if (result > 0)
+            break;
+    }
 
     return result;
 }
@@ -111,7 +132,7 @@ void setRandomDexedParameters (DexedAudioProcessor& dexed)
     dexed.setCurrentProgram (prog);
     std::cout << "Program: " << dexed.getProgramName (prog) << "\n\n";
 
-    getParams (dexed);
+    // getParams (dexed);
 }
 
 int writeBufferToFile (ScopedFormatManager& formatManager, File& outFile,
