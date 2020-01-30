@@ -76,7 +76,6 @@
         <FILE id="hhGkf2" name="SysexComm.h" compile="0" resource="0" file="../dexed/Source/SysexComm.h"/>
       </GROUP>
       <GROUP id="{19B138BB-A69F-C66E-3338-6BB8412DC83D}" name="Resources">
-        <GROUP id="{DD14B2AB-5318-F877-FA71-4639BB6D2DA4}" name="Source"/>
         <FILE id="mNk73d" name="about.png" compile="0" resource="1" file="../dexed/Resources/about.png"/>
         <FILE id="gvWBKY" name="builtin_pgm.zip" compile="0" resource="1" file="../dexed/Resources/builtin_pgm.zip"/>
         <FILE id="oI453W" name="ButtonUnlabeled_50x30.png" compile="0" resource="1"
@@ -106,6 +105,7 @@
     </GROUP>
     <GROUP id="{EC944704-8C08-3F20-0560-6054C9218E8B}" name="Source">
       <FILE id="sBBKRU" name="Main.cpp" compile="1" resource="0" file="Source/Main.cpp"/>
+      <FILE id="qi3v3N" name="shared_funcs.h" compile="0" resource="0" file="../shared_funcs.h"/>
     </GROUP>
   </MAINGROUP>
   <EXPORTFORMATS>

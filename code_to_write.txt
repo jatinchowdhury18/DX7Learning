@@ -1,0 +1,16 @@
+audio files (N)
+Learn M parameters
+
+- split into testing/training
+- initialize parameter matrix, X (M rows x N columns)
+- create neural network (M inputs, M outputs) (number of layers, activations, optimizer)
+- Loss function (generate audio file from parameters, compute STFT loss)
+- run the model
+
+############################################
+
+y = np.array(1000, 2)
+
+Y = np.fft.stft(y[:,0])
+Y = np.fft.stft(y[:,1])
+

@@ -9,22 +9,10 @@
 */
 
 #include "JuceHeader.h"
+#include "../../shared_funcs.h"
 #include "../../dexed/Source/PluginProcessor.h"
 
-class ScopedFormatManager : public AudioFormatManager
-{
-public:
-    ScopedFormatManager() { registerBasicFormats(); }
-    ~ScopedFormatManager() { clearFormats(); }
-
-private:
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ScopedFormatManager)    
-};
-
-int writeBufferToFile (ScopedFormatManager& formatManager, File& outFile,
-                       const AudioBuffer<float>& buffer, double sampleRate, int lengthSamples);
 void setRandomDexedParameters (DexedAudioProcessor& dexed, Array<File>& carts, Random& rand);
-void randomMidiBuffer (MidiBuffer& midi, int lengthSamples, Random& rand);
 void getParams (DexedAudioProcessor& dexed);
 
 int main (int argc, char* argv[])
@@ -56,7 +44,7 @@ int main (int argc, char* argv[])
     
     // MIDI buffer
     MidiBuffer midi;
-    randomMidiBuffer (midi, lengthSamples, rand);
+    getMidiBuffer (midi, lengthSamples);
 
     // How many files to create
     int num = args.containsOption ("--num") ?
@@ -102,39 +90,6 @@ int main (int argc, char* argv[])
     return result;
 }
 
-void randomMidiBuffer (MidiBuffer& midi, int lengthSamples, Random& rand)
-{
-    midi.clear();
-
-    const int midiChannel = 1;
-    const int noteNums[7] = {36, 42, 48, 54, 60, 66, 72};
-    const int lengths[7] = {10000, 3000, 50000, 5000, 8000, 70000, 6000};
-    const int offLength = 30000;
-
-    int curSample = 0;
-    int noteIdx = 0;
-    bool turnOn = true;
-    while (curSample < lengthSamples)
-    {
-        if (turnOn)
-        {
-            midi.addEvent (MidiMessage::noteOn (midiChannel, noteNums[noteIdx], 1.0f), curSample);
-            curSample += lengths[noteIdx];
-        }
-        else
-        {
-            midi.addEvent (MidiMessage::noteOff (midiChannel, noteNums[noteIdx]), curSample);
-            curSample += offLength;
-            noteIdx++;
-        }
-
-        if (noteIdx >= 7)
-            break;
-
-        turnOn = ! turnOn;
-    }
-}
-
 void getParams (DexedAudioProcessor& dexed)
 {
     for (auto* ctrl : dexed.ctrl)
@@ -154,22 +109,4 @@ void setRandomDexedParameters (DexedAudioProcessor& dexed, Array<File>& carts, R
     std::cout << "Program: " << dexed.getProgramName (prog) << std::endl;
 
     // getParams (dexed);
-}
-
-int writeBufferToFile (ScopedFormatManager& formatManager, File& outFile,
-                       const AudioBuffer<float>& buffer, double sampleRate, int lengthSamples)
-{
-    std::unique_ptr<AudioFormatWriter> writer (formatManager.findFormatForFileExtension ("wav")->createWriterFor 
-        (outFile.createOutputStream(), (double) sampleRate, AudioChannelSet::stereo(), 16, StringPairArray(), 0));
-
-    if (writer.get() == nullptr)
-    {
-        std::cout << "Unable to write audio to file" << std::endl;
-        return 1;
-    }
-
-    writer->flush();
-    writer->writeFromAudioSampleBuffer (buffer, 0, lengthSamples);
-
-    return 0;
 }

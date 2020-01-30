@@ -1,3 +1,3 @@
-[submodule "Gen_Data/dexed"]
-	path = Gen_Data/dexed
+[submodule "Dexed_Utils/dexed"]
+	path = Dexed_Utils/dexed
 	url = https://github.com/jatinchowdhury18/dexed.git
