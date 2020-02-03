@@ -32,7 +32,7 @@ int main (int argc, char* argv[])
     outDir.createDirectory();
 
     // Set up buffer  
-    const float sampleRate = 48000.0f;
+    const float sampleRate = 16000.0f;
     const float lengthSeconds = args.containsOption ("--length") ?
         args.getValueForOption ("--length").getFloatValue() : 10.0f;
     std::cout << lengthSeconds << std::endl;
