@@ -35,7 +35,7 @@ int main (int argc, char* argv[])
     // Set up buffer  
     const float sampleRate = 16000.0f;
     const float lengthSeconds = args.containsOption ("--length") ?
-        args.getValueForOption ("--length").getFloatValue() : 10.0f;
+        args.getValueForOption ("--length").getFloatValue() : 2.0f;
     std::cout << lengthSeconds << std::endl;
     const int numChannels = 2;
     const int lengthSamples = int (sampleRate * lengthSeconds);

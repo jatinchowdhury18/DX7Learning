@@ -18,9 +18,10 @@ void getMidiBuffer (MidiBuffer& midi, int lengthSamples)
     midi.clear();
 
     const int midiChannel = 1;
-    const int noteNums[7] = {36, 42, 48, 54, 60, 66, 72};
-    const int lengths[7] = {10000, 3000, 50000, 5000, 8000, 70000, 6000};
-    const int offLength = 30000;
+    const static int numNotes = 5;
+    const int noteNums[numNotes] = {36, 48, 55, 64, 72};
+    const int lengths[numNotes] = {3000, 1000, 18000, 2000, 3000};
+    const int offLength = 5000;
 
     int curSample = 0;
     int noteIdx = 0;
@@ -30,7 +31,7 @@ void getMidiBuffer (MidiBuffer& midi, int lengthSamples)
         if (turnOn)
         {
             midi.addEvent (MidiMessage::noteOn (midiChannel, noteNums[noteIdx], 1.0f), curSample);
-            curSample += lengths[noteIdx];
+            curSample += lengths[noteIdx] / 3;
         }
         else
         {
@@ -39,7 +40,7 @@ void getMidiBuffer (MidiBuffer& midi, int lengthSamples)
             noteIdx++;
         }
 
-        if (noteIdx >= 7)
+        if (noteIdx >= numNotes)
             break;
 
         turnOn = ! turnOn;
