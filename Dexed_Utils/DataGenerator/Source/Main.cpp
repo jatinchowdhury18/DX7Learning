@@ -27,10 +27,17 @@ int main (int argc, char* argv[])
 
     // Create output directory
     File outDir (File::getCurrentWorkingDirectory().getChildFile ("testDir"));
-    if (args.containsOption ("--outdir"))
-        outDir = args.getFileForOption ("--outdir");
+    if (args.containsOption ("--audiodir"))
+        outDir = args.getFileForOption ("--oudir");
     outDir.deleteRecursively();
     outDir.createDirectory();
+
+    // create parameters file
+    File paramsFile (File::getCurrentWorkingDirectory().getChildFile ("params.csv"));
+    if (args.containsOption ("--paramfile"))
+        paramsFile = args.getFileForOption ("--paramfile");
+    paramsFile.deleteFile();
+    paramsFile.create();
 
     // Set up buffer  
     const float sampleRate = 16000.0f;
@@ -81,11 +88,25 @@ int main (int argc, char* argv[])
         // write to file
         result = writeBufferToFile (formatManager, outFile, buffer, (double) sampleRate, lengthSamples);
 
+        // write params
+        std::stringstream ss;
+        const int numCtrls = dexed.ctrl.size();
+        for (int k = 0; k < numCtrls; ++k)
+        {
+            ss << dexed.ctrl[k]->getValueHost();
+            if (k != numCtrls-1)
+                ss << ',';
+            else
+                ss << '\n';
+        }
+        
+        paramsFile.appendText (ss.str());
+
         if (result > 0)
             break;
     }
 
-    getParams (dexed);
+    // getParams (dexed);
 
     return result;
 }
