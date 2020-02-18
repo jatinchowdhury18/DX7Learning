@@ -27,8 +27,8 @@ int main (int argc, char* argv[])
 
     // Create output directory
     File outDir (File::getCurrentWorkingDirectory().getChildFile ("testDir"));
-    if (args.containsOption ("--audiodir"))
-        outDir = args.getFileForOption ("--oudir");
+    if (args.containsOption ("--outdir"))
+        outDir = args.getFileForOption ("--outdir");
     outDir.deleteRecursively();
     outDir.createDirectory();
 
