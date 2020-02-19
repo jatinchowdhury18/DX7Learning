@@ -25,6 +25,10 @@ train_y = params[:N_train,:]
 test_X = X[N_train:,:]
 test_y = params[N_train:,:]
 
+print(np.shape(X))
+print(np.shape(train_X))
+print(np.shape(train_y))
+
 # Loss function
 class DX7Error(losses.Loss):
     def call(self, y_true, y_pred):
@@ -34,7 +38,10 @@ class DX7Error(losses.Loss):
 
 # create tensorflow model
 model = models.Sequential()
-model.add(layers.Dense(2048, input_shape=((X.shape[1],)), activation='relu'))
+model.add(layers.InputLayer(input_shape=((X.shape[1],))))
+model.add(layers.Dense(8192, activation='relu'))
+model.add(layers.Dense(4096, activation='relu'))
+model.add(layers.Dense(2048, activation='relu'))
 model.add(layers.Dense(1024, activation='relu'))
 model.add(layers.Dense(256, activation='relu'))
 model.add(layers.Dense(155, activation='sigmoid'))
@@ -45,15 +52,15 @@ model.add(layers.Dense(155, activation='sigmoid'))
 model.compile(optimizer='adam', loss='mse', metrics=['accuracy'])
 
 # train model
-history = model.fit(train_X, train_y, epochs=10, validation_data=(test_X, test_y))
+history = model.fit(train_X, train_y, epochs=100, validation_data=(test_X, test_y))
 
 # test model with test samples
-test_data = loadmat('xtestdata.mat')
+# test_data = loadmat('xtestdata.mat')
 #X = test_data['xTestData'][:20,:3000]
-X = test_data['xTestData']
+# X = test_data['xTestData']
 
 # predict output params
-predictions = model.predict(X)
+# predictions = model.predict(X)
 
 # print(predictions)
 # print(type(predictions))
@@ -63,9 +70,9 @@ predictions = model.predict(X)
 # num_params = predictions.shape[1]
 
 # save output params to file
-np.savetxt('params_out.csv', predictions, delimiter=',')
+# np.savetxt('params_out.csv', predictions, delimiter=',')
 # run ParamsToAudio to get output audio files
-os.system('./ParamsToAudio --outdir=TestOutputData --paramfile=params_out.csv')
+# os.system('./ParamsToAudio --outdir=TestOutputData --paramfile=params_out.csv')
 
 # train_y = []
 # path = 'SamplesDir'
