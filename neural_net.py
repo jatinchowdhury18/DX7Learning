@@ -56,6 +56,69 @@ model.add(layers.Dense(1024, activation='relu'))
 model.add(layers.Dense(256, activation='relu'))
 model.add(layers.Dense(155, activation='sigmoid'))
 
+''' POSSIBLE NEURAL NETWORKS TO USE '''
+################################################################################################
+def rnn_model(input_dim, units, recur_layers, dropout_rate, output_dim=155):
+''' This RNN uses GRUs '''
+    input_data = layers.Input(name='input', shape = (input_dim,))  #shape=(None, input_dim))
+    
+    for i in range(recur_layers):
+        if i == 0:
+            gru = GRU(units, activation='relu', 
+                    return_sequences=True, implementation=2, name='gru'+str(i))(input_data)
+            bn_rnn = BatchNormalization()(gru)
+            dropout_rnn = Dropout(dropout_rate)(bn_rnn)
+        else:
+            gru = GRU(units, activation='relu', 
+                    return_sequences=True, implementation=2, name='gru'+str(i))(dropout_rnn)
+            bn_rnn = BatchNormalization()(gru)
+            dropout_rnn = Dropout(dropout_rate)(bn_rnn)
+            
+    time_dense = TimeDistributed(Dense(output_dim))(dropout_rnn)
+    # add sigmoid activation layer
+    y_pred = Activation('sigmoid', name='sigmoid')(time_dense)
+    
+    model = models.Model(inputs=input_data, outputs=y_pred)
+    print(model.summary())
+    return model
+
+# model with 5 hidden layers
+model_1 = rnn_model(input_dim=X.shape[1], units=200, dropout_rate=0.8, recur_layers=4)
+
+
+###################################################################################
+def cnn_rnn_model(input_dim, filters, kernel_size, conv_stride, conv_border_mode, units, output_dim=155):
+''' CNN + RNN for spectrogram '''
+    input_data = Input(name='input', shape = (input_dim,))
+    
+    # convolutional layer
+    conv_1d = Conv1D(filters, kernel_size, strides=conv_stride, padding=conv_border_mode, activation='relu',name='conv1d')(input_data)
+    # batch normalization
+    bn_cnn = BatchNormalization(name='bn_conv_1d')(conv_1d)
+    # recurrent layer
+    simp_rnn = SimpleRNN(units, activation='relu', return_sequences=True, implementation=2, name='rnn')(bn_cnn)
+    # batch normalization
+    bn_rnn = BatchNormalization()(simp_rnn)
+    # TimeDistributed(Dense(output_dim)) layer
+    time_dense = TimeDistributed(Dense(output_dim))(bn_rnn)
+    
+    # sigmoid activation layer
+    y_pred = Activation('sigmoid', name='sigmoid')(time_dense)
+
+    model = models.Model(inputs=input_data, outputs=y_pred)
+    #model.output_length = lambda x: cnn_output_length(x, kernel_size, conv_border_mode, conv_stride)
+    print(model.summary())
+    return model
+
+model_2 = cnn_rnn_model(input_dim=X.shape[1],
+                        filters=200,
+                        kernel_size=11, 
+                        conv_stride=2,
+                        conv_border_mode='valid',
+                        units=200)
+###############################################################################
+
+
 # compile and run model
 # using Mean Squared Error as loss function for now 
 # training on parameters for now
