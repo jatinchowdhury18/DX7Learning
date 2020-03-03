@@ -88,7 +88,7 @@ model_1 = rnn_model(input_dim=X.shape[1], units=200, dropout_rate=0.8, recur_lay
 
 ###################################################################################
 def cnn_rnn_model(input_dim, filters, kernel_size, conv_stride, conv_border_mode, units, output_dim=155):
-''' CNN + RNN for spectrogram '''
+''' CNN + RNN '''
     input_data = Input(name='input', shape = (input_dim,))
     
     # convolutional layer
@@ -117,7 +117,21 @@ model_2 = cnn_rnn_model(input_dim=X.shape[1],
                         conv_border_mode='valid',
                         units=200)
 ###############################################################################
+def cnn_model(input_dim, output_dim):
+'''CNN for spectrogram'''
+'''in progress'''
+    model = Sequential()
+    model.add(Conv2D(input_dim, kernel_size=(3, 3), activation='relu', input_shape=input_shape))
+    model.add(Conv2D(input_dim * 2, kernel_size=(3, 3), activation='relu'))
+    model.add(MaxPooling2D(pool_size=(2, 2)))
+    model.add(Dropout(0.8))
+    model.add(Flatten())
+    model.add(Dense(input_dim * 4, activation='relu'))
+    model.add(Dropout(0.8))
+    model.add(Dense(output_dim, activation='sigmoid'))
 
+    print(model.summary())
+##############################################################################
 
 # compile and run model
 # using Mean Squared Error as loss function for now 
