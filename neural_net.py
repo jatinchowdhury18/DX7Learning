@@ -162,6 +162,79 @@ model_2 = cnn_rnn_model(input_dim=X.shape[1:],
 # exit()
 
 ###############################################################################
+def cnn_birnn_model(input_dim, filters, kernel_size, conv_stride, conv_border_mode, units, output_dim=155):
+    ''' CNN + RNN '''
+    input_data = layers.Input(name='input', shape = input_dim)
+    
+    # convolutional layer
+    conv_1d = layers.Conv1D(filters, kernel_size, strides=conv_stride, padding=conv_border_mode, activation='relu',name='conv1d')(input_data)
+    # max pool
+    max_pool = layers.MaxPooling1D(pool_size=4)(conv_1d)
+    # batch normalization
+    bn_cnn = layers.BatchNormalization(name='bn_conv_1d')(max_pool)
+
+    # convolutional layer #2
+    conv_1d_2 = layers.Conv1D(filters, kernel_size, strides=conv_stride, padding=conv_border_mode, activation='relu',name='conv1d_2')(bn_cnn)
+    # max pool
+    max_pool = layers.MaxPooling1D(pool_size=4)(conv_1d_2)
+    # batch normalization
+    bn_cnn_2 = layers.BatchNormalization(name='bn_conv_1d_2')(max_pool)
+
+    # convolutional layer #3
+    conv_1d_2 = layers.Conv1D(filters, kernel_size, strides=conv_stride, padding=conv_border_mode, activation='relu',name='conv1d_3')(bn_cnn_2)
+    # max pool
+    max_pool = layers.MaxPooling1D(pool_size=4)(conv_1d_2)
+    # batch normalization
+    bn_cnn_2 = layers.BatchNormalization(name='bn_conv_1d_3')(conv_1d_2)
+
+    # convolutional layer #4
+    conv_1d_2 = layers.Conv1D(filters, kernel_size, strides=conv_stride, padding=conv_border_mode, activation='relu',name='conv1d_4')(bn_cnn_2)
+    # max pool
+    max_pool = layers.MaxPooling1D(pool_size=4)(conv_1d_2)
+    # batch normalization
+    bn_cnn_2 = layers.BatchNormalization(name='bn_conv_1d_4')(conv_1d_2)
+
+    # convolutional layer #5
+    conv_1d_2 = layers.Conv1D(filters, kernel_size, strides=conv_stride, padding=conv_border_mode, activation='relu',name='conv1d_5')(bn_cnn_2)
+    # max pool
+    max_pool = layers.MaxPooling1D(pool_size=4)(conv_1d_2)
+    # batch normalization
+    bn_cnn_2 = layers.BatchNormalization(name='bn_conv_1d_5')(conv_1d_2)
+
+    # BIDIRECTIONAL recurrent layer
+    bi_simp_rnn = layers.Bidirectional(layers.SimpleRNN(units, activation='relu', return_sequences=True, implementation=2, name='bi-rnn'), merge_mode='concat')(bn_cnn_2)
+    # batch normalization
+    bn_rnn = layers.BatchNormalization()(bi_simp_rnn)
+
+    # recurrent layer
+    # simp_rnn = layers.SimpleRNN(units//4, activation='relu', return_sequences=True, implementation=2, name='rnn_2')(bn_rnn)
+    # # batch normalization
+    # bn_rnn = layers.BatchNormalization()(simp_rnn)
+
+    flat = layers.Flatten()(bn_rnn)
+    dense = layers.Dense(512)(flat)
+    dense = layers.Dense(256)(dense)
+    dense = layers.Dense(output_dim)(dense)
+
+    # TimeDistributed(Dense(output_dim)) layer
+    # time_dense = layers.TimeDistributed(layers.Dense(output_dim))(bn_rnn)
+    
+    # sigmoid activation layer
+    y_pred = layers.Activation('sigmoid', name='sigmoid')(dense)
+
+    model = models.Model(inputs=input_data, outputs=y_pred)
+    #model.output_length = lambda x: cnn_output_length(x, kernel_size, conv_border_mode, conv_stride)
+    print(model.summary())
+    return model
+
+model_3 = cnn_rnn_model(input_dim=X.shape[1:],
+                        filters=200,
+                        kernel_size=11, 
+                        conv_stride=2,
+                        conv_border_mode='valid',
+                        units=200)
+# exit()
+###########################################################################################
 def cnn_model(input_dim, output_dim):
     '''CNN for spectrogram'''
     '''in progress'''
